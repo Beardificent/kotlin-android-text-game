@@ -1,5 +1,6 @@
 package com.becode.text_adventure
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_game_screen.*
@@ -25,5 +26,10 @@ class GameScreen : AppCompatActivity() {
         }
 
         story.startingPoint()
+    }
+    fun goTitleScreen(){
+
+        val titles = Intent(this, TitleScreen::class.java)
+        startActivity(titles)
     }
 }
