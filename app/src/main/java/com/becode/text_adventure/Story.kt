@@ -20,6 +20,8 @@ class Story (val gs: GameScreen) {
             "pipe" -> pipe()
             "plant" -> plant()
             "sword" -> sword()
+            "monster" -> monster()
+            "attack" -> attack()
             "dead" -> dead()
             "goTitleScreen" -> gs.goTitleScreen()
         }
@@ -144,6 +146,65 @@ class Story (val gs: GameScreen) {
         nextPosition2 = ""
         nextPosition3 = ""
         nextPosition4 = ""
+    }
+
+    fun monster(){
+
+        gs.gameImageView.setImageResource(R.drawable.beedrill)
+        gs.gameTextView.setText("You encounter the biggest bee you've ever seen!")
+
+        gs.gameChoice1.setText("Attack")
+        gs.gameChoice2.setText("Run")
+        gs.gameChoice3.setText("")
+        gs.gameChoice4.setText("")
+        gs.gameChoice3.setVisibility(View.INVISIBLE)
+        gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+        nextPosition1 = "attack"
+        nextPosition2 = "startingPoint"
+        nextPosition3 = ""
+        nextPosition4 = ""
+    }
+
+    fun attack(){
+        if(haveWeapon==true && panicked==true){
+            gs.gameImageView.setImageResource(R.drawable.pikachu)
+            gs.gameTextView.setText("The turtle ate the bee whilst your were flailing your arms about!\n\n" +
+                    "You find a rad hat, great loot! " +
+                    "Also you now have an electric mouse aswell.")
+
+
+            gs.gameChoice1.setText("Go to title screen")
+            gs.gameChoice2.setText("")
+            gs.gameChoice3.setText("")
+            gs.gameChoice4.setText("")
+            gs.gameChoice2.setVisibility(View.INVISIBLE)
+            gs.gameChoice3.setVisibility(View.INVISIBLE)
+            gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+            nextPosition1 = "goTitleScreen"
+            nextPosition2 = ""
+            nextPosition3 = ""
+            nextPosition4 = ""
+        } else {
+
+            gs.gameImageView.setImageResource(R.drawable.beedrill)
+            gs.gameTextView.setText("The bee stung you and you died from your allergies.")
+
+
+            gs.gameChoice1.setText(">")
+            gs.gameChoice2.setText("")
+            gs.gameChoice3.setText("")
+            gs.gameChoice4.setText("")
+            gs.gameChoice2.setVisibility(View.INVISIBLE)
+            gs.gameChoice3.setVisibility(View.INVISIBLE)
+            gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+            nextPosition1 = "dead"
+            nextPosition2 = ""
+            nextPosition3 = ""
+            nextPosition4 = ""
+        }
     }
 
     fun dead() {
