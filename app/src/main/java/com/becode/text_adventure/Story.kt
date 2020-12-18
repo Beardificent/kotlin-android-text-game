@@ -9,6 +9,8 @@ class Story (val gs: GameScreen) {
     var nextPosition2 = ""
     var nextPosition3 = ""
     var nextPosition4 = ""
+    var haveWeapon = false
+    var panicked = false
 
     fun selectPosition(position: String) {
 
@@ -80,28 +82,55 @@ class Story (val gs: GameScreen) {
         nextPosition4 = ""
     }
     fun plant(){
-        gs.gameImageView.setImageResource(R.drawable.bulbasaur)
-        gs.gameTextView.setText("There's a weird plant inside!! It released a poisonous spore\n\n " +
-                "It seems you died. ")
 
-        gs.gameChoice1.setText(">")
-        gs.gameChoice2.setText("")
-        gs.gameChoice3.setText("")
-        gs.gameChoice4.setText("")
-        gs.gameChoice2.setVisibility(View.INVISIBLE)
-        gs.gameChoice3.setVisibility(View.INVISIBLE)
-        gs.gameChoice4.setVisibility(View.INVISIBLE)
+        if(haveWeapon == false){
+            gs.gameImageView.setImageResource(R.drawable.bulbasaur)
+            gs.gameTextView.setText("There's a weird plant inside!! It released a poisonous spore\n\n " +
+                    "It seems you died. ")
 
-        nextPosition1 = "dead"
-        nextPosition2 = ""
-        nextPosition3 = ""
-        nextPosition4 = ""
+            gs.gameChoice1.setText(">")
+            gs.gameChoice2.setText("")
+            gs.gameChoice3.setText("")
+            gs.gameChoice4.setText("")
+            gs.gameChoice2.setVisibility(View.INVISIBLE)
+            gs.gameChoice3.setVisibility(View.INVISIBLE)
+            gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+            nextPosition1 = "dead"
+            nextPosition2 = ""
+            nextPosition3 = ""
+            nextPosition4 = ""
+
+        }
+
+        if(haveWeapon == true) {
+            gs.gameImageView.setImageResource(R.drawable.bulbasaur)
+            gs.gameTextView.setText("There's a weird plant inside!! You panic and hit it repeatedly with your Turtlefist!\n\nYou killed it!")
+
+            panicked = true
+
+            gs.gameChoice1.setText("Go back")
+            gs.gameChoice2.setText("")
+            gs.gameChoice3.setText("")
+            gs.gameChoice4.setText("")
+            gs.gameChoice2.setVisibility(View.INVISIBLE)
+            gs.gameChoice3.setVisibility(View.INVISIBLE)
+            gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+            nextPosition1 = "startingPoint"
+            nextPosition2 = ""
+            nextPosition3 = ""
+            nextPosition4 = ""
+        }
+
     }
 
     fun sword() {
 
         gs.gameImageView.setImageResource(R.drawable.squirtle)
         gs.gameTextView.setText("Amazing! A Snapping Turtle to fight for your safety!\n\n (You take some mud and use it as glue to attach the turtle to your fist)")
+
+        haveWeapon = true
 
         gs.gameChoice1.setText("Back")
         gs.gameChoice2.setText("")
