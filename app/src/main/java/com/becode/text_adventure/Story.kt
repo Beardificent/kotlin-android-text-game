@@ -1,5 +1,6 @@
 package com.becode.text_adventure
 
+import android.view.View
 import kotlinx.android.synthetic.main.activity_game_screen.*
 
 class Story (val gs: GameScreen) {
@@ -18,7 +19,7 @@ class Story (val gs: GameScreen) {
     }
 
     fun startingPoint () {
-
+        gs.gameImageView.setImageResource(R.drawable.charmander)
         gs.gameTextView.setText("You are on the road. There is a wooden sign nearby.\n\n What will you do?")
 
         gs.gameChoice1.setText("Go North.")
@@ -33,13 +34,16 @@ class Story (val gs: GameScreen) {
     }
     fun sign (){
 
-        gs.gameImageView.setImageResource(R.drawable.charmander)
+        gs.gameImageView.setImageResource(R.drawable.charmeleon)
         gs.gameTextView.setText("The sign reads: \n\nMONSTER AHEAD!")
 
         gs.gameChoice1.setText("Go back.")
         gs.gameChoice2.setText("")
         gs.gameChoice3.setText("")
         gs.gameChoice4.setText("")
+        gs.gameChoice2.setVisibility(View.INVISIBLE)
+        gs.gameChoice3.setVisibility(View.INVISIBLE)
+        gs.gameChoice4.setVisibility(View.INVISIBLE)
 
         nextPosition1 = "startingPoint"
         nextPosition2 = ""
