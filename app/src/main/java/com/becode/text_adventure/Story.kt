@@ -40,7 +40,7 @@ class Story (val gs: GameScreen) {
 
 
     fun startingPoint () {
-        gs.gameImageView.setImageResource(R.drawable.charmander)
+        gs.gameImageView.setImageResource(R.drawable.pixelforest2)
         gs.gameTextView.setText("You are on the road. There is a wooden sign nearby.\n\n What will you do?")
 
         gs.gameChoice1.setText("Go North.")
@@ -159,7 +159,7 @@ class Story (val gs: GameScreen) {
 
 
         if (killedMonster==true) {
-            gs.gameImageView.setImageResource(R.drawable.pikachu)
+            gs.gameImageView.setImageResource(R.drawable.pixelforest2)
             gs.gameTextView.setText("Nothing here of importance, except that bee cadaver maybe.")
 
             gs.gameChoice1.setText("Continue")
