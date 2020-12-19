@@ -10,10 +10,11 @@ class Story (val gs: GameScreen) {
     var nextPosition3 = ""
     var nextPosition4 = ""
     var haveWeapon = false
-    var panicked = false
+    var fightExperience = false
+    var killedMonster = false
 
     fun selectPosition(position: String) {
-
+//when() replaces switch
         when(position){
             "startingPoint" -> startingPoint()
             "sign" -> sign()
@@ -22,10 +23,13 @@ class Story (val gs: GameScreen) {
             "sword" -> sword()
             "monster" -> monster()
             "attack" -> attack()
+            "villager" -> villager()
             "dead" -> dead()
             "goTitleScreen" -> gs.goTitleScreen()
         }
     }
+
+
 
     fun showAllButtons(){
         gs.gameChoice1.setVisibility(View.VISIBLE)
@@ -33,6 +37,8 @@ class Story (val gs: GameScreen) {
         gs.gameChoice3.setVisibility(View.VISIBLE)
         gs.gameChoice4.setVisibility(View.VISIBLE)
     }
+
+
     fun startingPoint () {
         gs.gameImageView.setImageResource(R.drawable.charmander)
         gs.gameTextView.setText("You are on the road. There is a wooden sign nearby.\n\n What will you do?")
@@ -43,6 +49,7 @@ class Story (val gs: GameScreen) {
         gs.gameChoice4.setText("Read Sign.")
 
         showAllButtons()
+
         nextPosition1 = "monster"
         nextPosition2 = "sword"
         nextPosition3 = "pipe"
@@ -109,7 +116,7 @@ class Story (val gs: GameScreen) {
             gs.gameImageView.setImageResource(R.drawable.bulbasaur)
             gs.gameTextView.setText("There's a weird plant inside!! You panic and hit it repeatedly with your Turtlefist!\n\nYou killed it!")
 
-            panicked = true
+            fightExperience = true
 
             gs.gameChoice1.setText("Go back")
             gs.gameChoice2.setText("")
@@ -150,40 +157,58 @@ class Story (val gs: GameScreen) {
 
     fun monster(){
 
-        gs.gameImageView.setImageResource(R.drawable.beedrill)
-        gs.gameTextView.setText("You encounter the biggest bee you've ever seen!")
 
-        gs.gameChoice1.setText("Attack")
-        gs.gameChoice2.setText("Run")
-        gs.gameChoice3.setText("")
-        gs.gameChoice4.setText("")
-        gs.gameChoice3.setVisibility(View.INVISIBLE)
-        gs.gameChoice4.setVisibility(View.INVISIBLE)
-
-        nextPosition1 = "attack"
-        nextPosition2 = "startingPoint"
-        nextPosition3 = ""
-        nextPosition4 = ""
-    }
-
-    fun attack(){
-        if(haveWeapon==true && panicked==true){
+        if (killedMonster==true) {
             gs.gameImageView.setImageResource(R.drawable.pikachu)
-            gs.gameTextView.setText("The turtle ate the bee whilst your were flailing your arms about!\n\n" +
-                    "You find a rad hat, great loot! " +
-                    "Also you now have an electric mouse aswell.")
+            gs.gameTextView.setText("Nothing here of importance, except that bee cadaver maybe.")
 
-
-            gs.gameChoice1.setText("Go to title screen")
-            gs.gameChoice2.setText("")
+            gs.gameChoice1.setText("Continue")
+            gs.gameChoice2.setText("Go to title screen")
             gs.gameChoice3.setText("")
             gs.gameChoice4.setText("")
             gs.gameChoice2.setVisibility(View.INVISIBLE)
             gs.gameChoice3.setVisibility(View.INVISIBLE)
             gs.gameChoice4.setVisibility(View.INVISIBLE)
 
-            nextPosition1 = "goTitleScreen"
+            nextPosition1 = "villager"
             nextPosition2 = ""
+            nextPosition3 = ""
+            nextPosition4 = ""
+        } else {
+            gs.gameImageView.setImageResource(R.drawable.beedrill)
+            gs.gameTextView.setText("You encounter the biggest bee you've ever seen!")
+
+            gs.gameChoice1.setText("Attack")
+            gs.gameChoice2.setText("Run")
+            gs.gameChoice3.setText("")
+            gs.gameChoice4.setText("")
+            gs.gameChoice3.setVisibility(View.INVISIBLE)
+            gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+            nextPosition1 = "attack"
+            nextPosition2 = "startingPoint"
+            nextPosition3 = ""
+            nextPosition4 = ""
+        }
+    }
+
+    fun attack(){
+        if(haveWeapon==true && fightExperience==true){
+            gs.gameImageView.setImageResource(R.drawable.pikachu)
+            gs.gameTextView.setText("The turtle ate the bee whilst your were flailing your arms about!\n\n" +
+                    "You find a rad hat, great loot! " +
+                    "Also you now have an electric mouse aswell.")
+            killedMonster = true
+
+            gs.gameChoice1.setText("Continue")
+            gs.gameChoice2.setText("Go to title screen")
+            gs.gameChoice3.setText("")
+            gs.gameChoice4.setText("")
+            gs.gameChoice3.setVisibility(View.INVISIBLE)
+            gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+            nextPosition1 = "villager"
+            nextPosition2 = "goTitleScreen"
             nextPosition3 = ""
             nextPosition4 = ""
         } else {
@@ -205,6 +230,24 @@ class Story (val gs: GameScreen) {
             nextPosition3 = ""
             nextPosition4 = ""
         }
+    }
+
+    fun villager(){
+        gs.gameImageView.setImageResource(R.drawable.pixil)
+        gs.gameTextView.setText("\n\n 'Hello friend, how are you? Have you seen a red hat and a mouse around?'")
+
+
+        gs.gameChoice1.setText("Give possessions back")
+        gs.gameChoice2.setText("Go back")
+        gs.gameChoice3.setText("")
+        gs.gameChoice4.setText("")
+        gs.gameChoice3.setVisibility(View.INVISIBLE)
+        gs.gameChoice4.setVisibility(View.INVISIBLE)
+
+        nextPosition1 = "villager"
+        nextPosition2 = "monster"
+        nextPosition3 = ""
+        nextPosition4 = ""
     }
 
     fun dead() {
